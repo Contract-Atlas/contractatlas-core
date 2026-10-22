@@ -9,6 +9,7 @@
 
 * [Install and run](guide/install-and-run.md)
 * [Manifest](guide/manifest.md)
+* [GitHub Action and public registry](guide/github-action-and-registry.md)
 * [Demo: a real testnet upgrade](guide/demo-a-real-testnet-upgrade.md)
 
 ## Reference
