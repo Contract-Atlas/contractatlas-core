@@ -1,27 +1,27 @@
 name: ContractAtlas deployment check
-description: Compare live Soroban code with declared hashes and audit artifact references.
+description: Compare live Soroban contract WASM hashes with a manifest of declared and audit-reviewed hashes.
 inputs:
   manifest:
-    description: Manifest path relative to the caller's workspace.
+    description: Manifest path relative to the workspace.
     required: true
-  rpc:
-    description: HTTPS RPC URL for the manifest's network. Use a repository secret for credentials.
+  rpc-url:
+    description: HTTPS Stellar RPC URL for the manifest's network. Store credential-bearing URLs in a repository secret.
     required: true
   strict:
-    description: Fail on incomplete evidence as well as drift and unavailable reads.
-    default: 'true'
+    description: Set to 'true' to also fail on incomplete evidence (same as the CLI's --strict). Overrides fail-on.
+    default: 'false'
+  fail-on:
+    description: Comma list of statuses that fail the job (drift, incomplete, unavailable). Same default as the CLI.
+    default: 'drift,unavailable'
+  version:
+    description: Exact version of @anas.abubakar/contractatlas-core to install from npm.
+    default: '0.1.1'
 outputs:
   report:
-    description: JSON report path, including failed observations.
+    description: Path of the JSON report written by the run.
     value: ${{ steps.check.outputs.report }}
-  badge:
-    description: SVG badge path for this observation.
-    value: ${{ steps.check.outputs.badge }}
-  overall:
-    description: match, drift, incomplete or unavailable.
-    value: ${{ steps.check.outputs.overall }}
   exit-code:
-    description: Checker exit code.
+    description: Exit code of the checker (0 ok, 1 failing status, 2 invalid manifest or usage, 3 unexpected error).
     value: ${{ steps.check.outputs.exit-code }}
 runs:
   using: composite
@@ -29,32 +29,41 @@ runs:
     - uses: actions/setup-node@v4
       with:
         node-version: 24
-    - uses: pnpm/action-setup@v4
-      with:
-        version: 11.25.0
-        package_json_file: ${{ github.action_path }}/package.json
-    - name: Build the pinned action source
+    - name: Install the pinned package
       shell: bash
       env:
-        CONTRACTATLAS_ACTION_PATH: ${{ github.action_path }}
+        CA_VERSION: ${{ inputs.version }}
       run: |
-        pnpm --dir "$CONTRACTATLAS_ACTION_PATH" install --frozen-lockfile
-        pnpm --dir "$CONTRACTATLAS_ACTION_PATH" run build
+        if ! [[ "$CA_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "version must be an exact x.y.z version" >&2
+          exit 2
+        fi
+        mkdir -p "$RUNNER_TEMP/contractatlas"
+        npm install --prefix "$RUNNER_TEMP/contractatlas" --no-audit --no-fund "@anas.abubakar/contractatlas-core@$CA_VERSION"
     - name: Check declared deployments
       id: check
       shell: bash
       env:
-        CONTRACTATLAS_ACTION_PATH: ${{ github.action_path }}
-        CONTRACTATLAS_MANIFEST: ${{ inputs.manifest }}
-        CONTRACTATLAS_RPC: ${{ inputs.rpc }}
-        CONTRACTATLAS_STRICT: ${{ inputs.strict }}
-      run: node "$CONTRACTATLAS_ACTION_PATH/dist/ci.js"
-    - name: Preserve observation artifacts
-      if: ${{ always() && steps.check.outputs.report != '' }}
-      uses: actions/upload-artifact@v4
-      with:
-        name: contractatlas-${{ github.job }}-${{ github.action }}
-        path: |
-          ${{ steps.check.outputs.report }}
-          ${{ steps.check.outputs.badge }}
-        if-no-files-found: error
+        CA_MANIFEST: ${{ inputs.manifest }}
+        CA_RPC: ${{ inputs.rpc-url }}
+        CA_STRICT: ${{ inputs.strict }}
+        CA_FAIL_ON: ${{ inputs.fail-on }}
+      run: |
+        args=(check "$CA_MANIFEST" --rpc "$CA_RPC" --format markdown --out "$RUNNER_TEMP/contractatlas/report.json")
+        if [ "$CA_STRICT" = "true" ]; then
+          args+=(--strict)
+        elif [ "$CA_STRICT" != "false" ]; then
+          echo "strict must be true or false" >&2
+          exit 2
+        else
+          args+=(--fail-on "$CA_FAIL_ON")
+        fi
+        set +e
+        "$RUNNER_TEMP/contractatlas/node_modules/.bin/contractatlas" "${args[@]}" > "$RUNNER_TEMP/contractatlas/report.md"
+        code=$?
+        set -e
+        cat "$RUNNER_TEMP/contractatlas/report.md"
+        cat "$RUNNER_TEMP/contractatlas/report.md" >> "$GITHUB_STEP_SUMMARY"
+        echo "report=$RUNNER_TEMP/contractatlas/report.json" >> "$GITHUB_OUTPUT"
+        echo "exit-code=$code" >> "$GITHUB_OUTPUT"
+        exit "$code"
