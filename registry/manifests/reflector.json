@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1",
+  "protocol": {
+    "name": "Reflector published mainnet oracles",
+    "homepage": "https://reflector.network",
+    "description": "Third-party registry transcription of official Stellar oracle-provider documentation. No declared hashes or reviewed-artifact audit mappings are asserted."
+  },
+  "network": {
+    "name": "mainnet",
+    "passphrase": "Public Global Stellar Network ; September 2015"
+  },
+  "contracts": [
+    {
+      "id": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+      "name": "Stellar DEX oracle",
+      "audits": [],
+      "limitations": [
+        "Registry transcription only; not supplied or reviewed by this protocol. Source: https://developers.stellar.org/docs/data/oracles/oracle-providers"
+      ]
+    },
+    {
+      "id": "CAFJZQWSED6YAWZU3GWRTOCNPPCGBN32L7QV43XX5LZLFTK6JLN34DLN",
+      "name": "External CEX and DEX oracle",
+      "audits": [],
+      "limitations": [
+        "Registry transcription only; not supplied or reviewed by this protocol. Source: https://developers.stellar.org/docs/data/oracles/oracle-providers"
+      ]
+    },
+    {
+      "id": "CBKGPWGKSKZF52CFHMTRR23TBWTPMRDIYZ4O2P5VS65BMHYH4DXMCJZC",
+      "name": "Fiat oracle",
+      "audits": [],
+      "limitations": [
+        "Registry transcription only; not supplied or reviewed by this protocol. Source: https://developers.stellar.org/docs/data/oracles/oracle-providers"
+      ]
+    }
+  ]
+}

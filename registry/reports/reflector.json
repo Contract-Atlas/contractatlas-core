@@ -1,0 +1,123 @@
+{
+  "reportVersion": "1",
+  "tool": {
+    "name": "contractatlas-core",
+    "version": "0.1.1"
+  },
+  "observedAt": "2026-10-22T15:51:41.796Z",
+  "manifest": {
+    "schemaVersion": "1",
+    "protocol": "Reflector published mainnet oracles",
+    "sha256": "2aa63791ff81aa3df0629cc2d26e1d6da7b2fa553cdeccbb4a287e911f4da7da",
+    "network": {
+      "name": "mainnet",
+      "passphrase": "Public Global Stellar Network ; September 2015"
+    }
+  },
+  "source": {
+    "rpcOrigin": "https://mainnet.sorobanrpc.com",
+    "latestLedger": null,
+    "network": {
+      "status": "unavailable",
+      "expected": "Public Global Stellar Network ; September 2015",
+      "detail": "fetch failed"
+    }
+  },
+  "summary": {
+    "match": 0,
+    "drift": 0,
+    "incomplete": 0,
+    "unavailable": 3
+  },
+  "overall": "unavailable",
+  "contracts": [
+    {
+      "id": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
+      "name": "Stellar DEX oracle",
+      "status": "unavailable",
+      "live": {
+        "kind": "unavailable"
+      },
+      "declared": {
+        "wasmHash": null,
+        "sourceCommit": null
+      },
+      "audits": [],
+      "declarations": {
+        "privileges": [],
+        "dependencies": [],
+        "limitations": [
+          "Registry transcription only; not supplied or reviewed by this protocol. Source: https://developers.stellar.org/docs/data/oracles/oracle-providers"
+        ]
+      },
+      "findings": [
+        {
+          "code": "network_unavailable",
+          "severity": "error",
+          "message": "The ledger source did not identify its network, so no contract comparison was made."
+        }
+      ]
+    },
+    {
+      "id": "CAFJZQWSED6YAWZU3GWRTOCNPPCGBN32L7QV43XX5LZLFTK6JLN34DLN",
+      "name": "External CEX and DEX oracle",
+      "status": "unavailable",
+      "live": {
+        "kind": "unavailable"
+      },
+      "declared": {
+        "wasmHash": null,
+        "sourceCommit": null
+      },
+      "audits": [],
+      "declarations": {
+        "privileges": [],
+        "dependencies": [],
+        "limitations": [
+          "Registry transcription only; not supplied or reviewed by this protocol. Source: https://developers.stellar.org/docs/data/oracles/oracle-providers"
+        ]
+      },
+      "findings": [
+        {
+          "code": "network_unavailable",
+          "severity": "error",
+          "message": "The ledger source did not identify its network, so no contract comparison was made."
+        }
+      ]
+    },
+    {
+      "id": "CBKGPWGKSKZF52CFHMTRR23TBWTPMRDIYZ4O2P5VS65BMHYH4DXMCJZC",
+      "name": "Fiat oracle",
+      "status": "unavailable",
+      "live": {
+        "kind": "unavailable"
+      },
+      "declared": {
+        "wasmHash": null,
+        "sourceCommit": null
+      },
+      "audits": [],
+      "declarations": {
+        "privileges": [],
+        "dependencies": [],
+        "limitations": [
+          "Registry transcription only; not supplied or reviewed by this protocol. Source: https://developers.stellar.org/docs/data/oracles/oracle-providers"
+        ]
+      },
+      "findings": [
+        {
+          "code": "network_unavailable",
+          "severity": "error",
+          "message": "The ledger source did not identify its network, so no contract comparison was made."
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "A match means the live WASM hash equals a hash an audit lists as reviewed. It does not mean the audit covered dependencies, deployment configuration or privileged roles.",
+    "Privileges, dependencies and limitations are declarations copied from the manifest. They are not verified by this tool.",
+    "A source commit is not compared with deployed code. Without an artifact hash mapping, audit coverage stays unresolved.",
+    "Contract entries that are archived or never deployed are reported unavailable, not as proof of absence.",
+    "This report is a point-in-time observation. It is not a security rating, audit or endorsement."
+  ]
+}

@@ -1,0 +1,33 @@
+name: Registry observations
+on:
+  workflow_dispatch:
+    inputs:
+      rpc:
+        description: Public HTTPS mainnet RPC endpoint (no credentials; use repository secrets in private workflows)
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - name: Observe official-source manifests
+        env:
+          CONTRACTATLAS_RPC: ${{ inputs.rpc }}
+        run: node scripts/check-registry.mjs "$CONTRACTATLAS_RPC" "$RUNNER_TEMP/registry-observation"
+      - name: Preserve failed and successful observations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: registry-observations
+          path: ${{ runner.temp }}/registry-observation/
+          if-no-files-found: error

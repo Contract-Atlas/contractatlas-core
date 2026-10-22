@@ -1,0 +1,32 @@
+{
+  "version": "1",
+  "entries": [
+    {
+      "slug": "blend-v2-1",
+      "manifest": "manifests/blend-v2-1.json",
+      "sources": [
+        "https://docs.blend.capital/mainnet-deployments"
+      ],
+      "retrievedOn": "2026-10-22",
+      "report": "reports/blend-v2-1.json"
+    },
+    {
+      "slug": "soroswap",
+      "manifest": "manifests/soroswap.json",
+      "sources": [
+        "https://github.com/soroswap/core/blob/main/public/mainnet.contracts.json"
+      ],
+      "retrievedOn": "2026-10-22",
+      "report": "reports/soroswap.json"
+    },
+    {
+      "slug": "reflector",
+      "manifest": "manifests/reflector.json",
+      "sources": [
+        "https://developers.stellar.org/docs/data/oracles/oracle-providers"
+      ],
+      "retrievedOn": "2026-10-22",
+      "report": "reports/reflector.json"
+    }
+  ]
+}

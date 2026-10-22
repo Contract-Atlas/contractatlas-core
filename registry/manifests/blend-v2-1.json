@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1",
+  "protocol": {
+    "name": "Blend v2.1 published deployments",
+    "homepage": "https://blend.capital",
+    "description": "Third-party registry transcription of official deployment addresses. No declared artifact or audit mapping was available in the deployment page; this manifest must not establish a match."
+  },
+  "network": {
+    "name": "mainnet",
+    "passphrase": "Public Global Stellar Network ; September 2015"
+  },
+  "contracts": [
+    {
+      "id": "CCOQM6S7ICIUWA225O5PSJWUBEMXGFSSW2PQFO6FP4DQEKMS5DASRGRR",
+      "name": "Emitter",
+      "audits": [],
+      "limitations": [
+        "Registry transcription only; not supplied or reviewed by this protocol. Source: https://docs.blend.capital/mainnet-deployments"
+      ]
+    },
+    {
+      "id": "CCS4AZ5ORM6VLLPJTJUFRNXWBMHOO3L5WHHRPL2ZMILE35ZDMQFHOQMJ",
+      "name": "Backstop v2.1",
+      "audits": [],
+      "limitations": [
+        "Registry transcription only; not supplied or reviewed by this protocol. Source: https://docs.blend.capital/mainnet-deployments"
+      ]
+    },
+    {
+      "id": "CACUXRNBUFV7BFPKUDLVJFQI6H7EHHNSJPOFJSCWJCYUUYMORM6C63AL",
+      "name": "Pool factory v2.1",
+      "audits": [],
+      "limitations": [
+        "Registry transcription only; not supplied or reviewed by this protocol. Source: https://docs.blend.capital/mainnet-deployments"
+      ]
+    }
+  ]
+}

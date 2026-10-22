@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "1",
+  "protocol": {
+    "name": "Soroswap published mainnet deployments",
+    "homepage": "https://soroswap.finance",
+    "description": "Third-party registry transcription of the official mainnet.contracts.json. Declared hashes come from that file, not from a live observation. No reviewed-artifact audit mapping is asserted."
+  },
+  "network": {
+    "name": "mainnet",
+    "passphrase": "Public Global Stellar Network ; September 2015"
+  },
+  "contracts": [
+    {
+      "id": "CA4HEQTL2WPEUYKYKCDOHCDNIV4QHNJ7EL4J4NQ6VADP7SYHVRYZ7AW2",
+      "name": "Factory",
+      "audits": [],
+      "limitations": [
+        "Registry transcription only; not supplied or reviewed by this protocol. Source: https://github.com/soroswap/core/blob/main/public/mainnet.contracts.json"
+      ],
+      "declaredWasmHash": "5db738b05d9148128a240b0e2c1cb935c2805192bf98a579421aacda364c8dae"
+    },
+    {
+      "id": "CAG5LRYQ5JVEUI5TEID72EYOVX44TTUJT5BQR2J6J77FH65PCCFAJDDH",
+      "name": "Router",
+      "audits": [],
+      "limitations": [
+        "Registry transcription only; not supplied or reviewed by this protocol. Source: https://github.com/soroswap/core/blob/main/public/mainnet.contracts.json"
+      ],
+      "declaredWasmHash": "4c3db3ebd2d6a2ab23de1f622eaabb39501539b4611b68622ec4e47f76c4ba07"
+    }
+  ]
+}
