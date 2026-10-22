@@ -8,7 +8,7 @@
         "https://docs.blend.capital/mainnet-deployments"
       ],
       "retrievedOn": "2026-10-22",
-      "report": "reports/blend-v2-1.json"
+      "report": "reports/2026-10-22/blend-v2-1.json"
     },
     {
       "slug": "soroswap",
@@ -17,7 +17,7 @@
         "https://github.com/soroswap/core/blob/main/public/mainnet.contracts.json"
       ],
       "retrievedOn": "2026-10-22",
-      "report": "reports/soroswap.json"
+      "report": "reports/2026-10-22/soroswap.json"
     },
     {
       "slug": "reflector",
@@ -26,7 +26,7 @@
         "https://developers.stellar.org/docs/data/oracles/oracle-providers"
       ],
       "retrievedOn": "2026-10-22",
-      "report": "reports/reflector.json"
+      "report": "reports/2026-10-22/reflector.json"
     }
   ]
 }

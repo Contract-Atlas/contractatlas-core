@@ -4,7 +4,7 @@
     "name": "contractatlas-core",
     "version": "0.1.1"
   },
-  "observedAt": "2026-10-22T15:51:40.453Z",
+  "observedAt": "2026-10-22T18:43:00.994Z",
   "manifest": {
     "schemaVersion": "1",
     "protocol": "Blend v2.1 published deployments",
@@ -16,27 +16,28 @@
   },
   "source": {
     "rpcOrigin": "https://mainnet.sorobanrpc.com",
-    "latestLedger": null,
+    "latestLedger": 65081759,
     "network": {
-      "status": "unavailable",
+      "status": "match",
       "expected": "Public Global Stellar Network ; September 2015",
-      "detail": "fetch failed"
+      "observed": "Public Global Stellar Network ; September 2015"
     }
   },
   "summary": {
     "match": 0,
     "drift": 0,
-    "incomplete": 0,
-    "unavailable": 3
+    "incomplete": 3,
+    "unavailable": 0
   },
-  "overall": "unavailable",
+  "overall": "incomplete",
   "contracts": [
     {
       "id": "CCOQM6S7ICIUWA225O5PSJWUBEMXGFSSW2PQFO6FP4DQEKMS5DASRGRR",
       "name": "Emitter",
-      "status": "unavailable",
+      "status": "incomplete",
       "live": {
-        "kind": "unavailable"
+        "kind": "wasm",
+        "wasmHash": "438a5528cff17ede6fe515f095c43c5f15727af17d006971485e52462e7e7b89"
       },
       "declared": {
         "wasmHash": null,
@@ -52,18 +53,22 @@
       },
       "findings": [
         {
-          "code": "network_unavailable",
-          "severity": "error",
-          "message": "The ledger source did not identify its network, so no contract comparison was made."
+          "code": "no_declared_artifact",
+          "severity": "warning",
+          "message": "The manifest declares no expected WASM hash for this contract, so the live code cannot be compared with anything.",
+          "evidence": {
+            "liveWasmHash": "438a5528cff17ede6fe515f095c43c5f15727af17d006971485e52462e7e7b89"
+          }
         }
       ]
     },
     {
       "id": "CCS4AZ5ORM6VLLPJTJUFRNXWBMHOO3L5WHHRPL2ZMILE35ZDMQFHOQMJ",
       "name": "Backstop v2.1",
-      "status": "unavailable",
+      "status": "incomplete",
       "live": {
-        "kind": "unavailable"
+        "kind": "wasm",
+        "wasmHash": "c1f4502a757e25c611f5a159bc1ab0eef64085adac6c68123dca66e87faffbc2"
       },
       "declared": {
         "wasmHash": null,
@@ -79,18 +84,22 @@
       },
       "findings": [
         {
-          "code": "network_unavailable",
-          "severity": "error",
-          "message": "The ledger source did not identify its network, so no contract comparison was made."
+          "code": "no_declared_artifact",
+          "severity": "warning",
+          "message": "The manifest declares no expected WASM hash for this contract, so the live code cannot be compared with anything.",
+          "evidence": {
+            "liveWasmHash": "c1f4502a757e25c611f5a159bc1ab0eef64085adac6c68123dca66e87faffbc2"
+          }
         }
       ]
     },
     {
       "id": "CACUXRNBUFV7BFPKUDLVJFQI6H7EHHNSJPOFJSCWJCYUUYMORM6C63AL",
       "name": "Pool factory v2.1",
-      "status": "unavailable",
+      "status": "incomplete",
       "live": {
-        "kind": "unavailable"
+        "kind": "wasm",
+        "wasmHash": "31328050548831f63d2b72e37bcfd0bb7371b7907135755dbe09ed434d755ca9"
       },
       "declared": {
         "wasmHash": null,
@@ -106,9 +115,12 @@
       },
       "findings": [
         {
-          "code": "network_unavailable",
-          "severity": "error",
-          "message": "The ledger source did not identify its network, so no contract comparison was made."
+          "code": "no_declared_artifact",
+          "severity": "warning",
+          "message": "The manifest declares no expected WASM hash for this contract, so the live code cannot be compared with anything.",
+          "evidence": {
+            "liveWasmHash": "31328050548831f63d2b72e37bcfd0bb7371b7907135755dbe09ed434d755ca9"
+          }
         }
       ]
     }

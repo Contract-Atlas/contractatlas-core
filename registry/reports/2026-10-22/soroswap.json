@@ -4,7 +4,7 @@
     "name": "contractatlas-core",
     "version": "0.1.1"
   },
-  "observedAt": "2026-10-22T15:51:41.141Z",
+  "observedAt": "2026-10-22T18:43:03.232Z",
   "manifest": {
     "schemaVersion": "1",
     "protocol": "Soroswap published mainnet deployments",
@@ -16,27 +16,28 @@
   },
   "source": {
     "rpcOrigin": "https://mainnet.sorobanrpc.com",
-    "latestLedger": null,
+    "latestLedger": 65081759,
     "network": {
-      "status": "unavailable",
+      "status": "match",
       "expected": "Public Global Stellar Network ; September 2015",
-      "detail": "fetch failed"
+      "observed": "Public Global Stellar Network ; September 2015"
     }
   },
   "summary": {
     "match": 0,
     "drift": 0,
-    "incomplete": 0,
-    "unavailable": 2
+    "incomplete": 2,
+    "unavailable": 0
   },
-  "overall": "unavailable",
+  "overall": "incomplete",
   "contracts": [
     {
       "id": "CA4HEQTL2WPEUYKYKCDOHCDNIV4QHNJ7EL4J4NQ6VADP7SYHVRYZ7AW2",
       "name": "Factory",
-      "status": "unavailable",
+      "status": "incomplete",
       "live": {
-        "kind": "unavailable"
+        "kind": "wasm",
+        "wasmHash": "5db738b05d9148128a240b0e2c1cb935c2805192bf98a579421aacda364c8dae"
       },
       "declared": {
         "wasmHash": "5db738b05d9148128a240b0e2c1cb935c2805192bf98a579421aacda364c8dae",
@@ -52,18 +53,22 @@
       },
       "findings": [
         {
-          "code": "network_unavailable",
-          "severity": "error",
-          "message": "The ledger source did not identify its network, so no contract comparison was made."
+          "code": "no_audit_reference",
+          "severity": "warning",
+          "message": "The manifest references no audit for this contract.",
+          "evidence": {
+            "liveWasmHash": "5db738b05d9148128a240b0e2c1cb935c2805192bf98a579421aacda364c8dae"
+          }
         }
       ]
     },
     {
       "id": "CAG5LRYQ5JVEUI5TEID72EYOVX44TTUJT5BQR2J6J77FH65PCCFAJDDH",
       "name": "Router",
-      "status": "unavailable",
+      "status": "incomplete",
       "live": {
-        "kind": "unavailable"
+        "kind": "wasm",
+        "wasmHash": "4c3db3ebd2d6a2ab23de1f622eaabb39501539b4611b68622ec4e47f76c4ba07"
       },
       "declared": {
         "wasmHash": "4c3db3ebd2d6a2ab23de1f622eaabb39501539b4611b68622ec4e47f76c4ba07",
@@ -79,9 +84,12 @@
       },
       "findings": [
         {
-          "code": "network_unavailable",
-          "severity": "error",
-          "message": "The ledger source did not identify its network, so no contract comparison was made."
+          "code": "no_audit_reference",
+          "severity": "warning",
+          "message": "The manifest references no audit for this contract.",
+          "evidence": {
+            "liveWasmHash": "4c3db3ebd2d6a2ab23de1f622eaabb39501539b4611b68622ec4e47f76c4ba07"
+          }
         }
       ]
     }

@@ -4,7 +4,7 @@
     "name": "contractatlas-core",
     "version": "0.1.1"
   },
-  "observedAt": "2026-10-22T15:51:41.796Z",
+  "observedAt": "2026-10-22T18:43:05.108Z",
   "manifest": {
     "schemaVersion": "1",
     "protocol": "Reflector published mainnet oracles",
@@ -16,27 +16,28 @@
   },
   "source": {
     "rpcOrigin": "https://mainnet.sorobanrpc.com",
-    "latestLedger": null,
+    "latestLedger": 65081760,
     "network": {
-      "status": "unavailable",
+      "status": "match",
       "expected": "Public Global Stellar Network ; September 2015",
-      "detail": "fetch failed"
+      "observed": "Public Global Stellar Network ; September 2015"
     }
   },
   "summary": {
     "match": 0,
     "drift": 0,
-    "incomplete": 0,
-    "unavailable": 3
+    "incomplete": 3,
+    "unavailable": 0
   },
-  "overall": "unavailable",
+  "overall": "incomplete",
   "contracts": [
     {
       "id": "CALI2BYU2JE6WVRUFYTS6MSBNEHGJ35P4AVCZYF3B6QOE3QKOB2PLE6M",
       "name": "Stellar DEX oracle",
-      "status": "unavailable",
+      "status": "incomplete",
       "live": {
-        "kind": "unavailable"
+        "kind": "wasm",
+        "wasmHash": "25fc306065cbb9b05461db78ec259802cb916053ba5b3ab911b0a72dd1a81439"
       },
       "declared": {
         "wasmHash": null,
@@ -52,18 +53,22 @@
       },
       "findings": [
         {
-          "code": "network_unavailable",
-          "severity": "error",
-          "message": "The ledger source did not identify its network, so no contract comparison was made."
+          "code": "no_declared_artifact",
+          "severity": "warning",
+          "message": "The manifest declares no expected WASM hash for this contract, so the live code cannot be compared with anything.",
+          "evidence": {
+            "liveWasmHash": "25fc306065cbb9b05461db78ec259802cb916053ba5b3ab911b0a72dd1a81439"
+          }
         }
       ]
     },
     {
       "id": "CAFJZQWSED6YAWZU3GWRTOCNPPCGBN32L7QV43XX5LZLFTK6JLN34DLN",
       "name": "External CEX and DEX oracle",
-      "status": "unavailable",
+      "status": "incomplete",
       "live": {
-        "kind": "unavailable"
+        "kind": "wasm",
+        "wasmHash": "25fc306065cbb9b05461db78ec259802cb916053ba5b3ab911b0a72dd1a81439"
       },
       "declared": {
         "wasmHash": null,
@@ -79,18 +84,22 @@
       },
       "findings": [
         {
-          "code": "network_unavailable",
-          "severity": "error",
-          "message": "The ledger source did not identify its network, so no contract comparison was made."
+          "code": "no_declared_artifact",
+          "severity": "warning",
+          "message": "The manifest declares no expected WASM hash for this contract, so the live code cannot be compared with anything.",
+          "evidence": {
+            "liveWasmHash": "25fc306065cbb9b05461db78ec259802cb916053ba5b3ab911b0a72dd1a81439"
+          }
         }
       ]
     },
     {
       "id": "CBKGPWGKSKZF52CFHMTRR23TBWTPMRDIYZ4O2P5VS65BMHYH4DXMCJZC",
       "name": "Fiat oracle",
-      "status": "unavailable",
+      "status": "incomplete",
       "live": {
-        "kind": "unavailable"
+        "kind": "wasm",
+        "wasmHash": "25fc306065cbb9b05461db78ec259802cb916053ba5b3ab911b0a72dd1a81439"
       },
       "declared": {
         "wasmHash": null,
@@ -106,9 +115,12 @@
       },
       "findings": [
         {
-          "code": "network_unavailable",
-          "severity": "error",
-          "message": "The ledger source did not identify its network, so no contract comparison was made."
+          "code": "no_declared_artifact",
+          "severity": "warning",
+          "message": "The manifest declares no expected WASM hash for this contract, so the live code cannot be compared with anything.",
+          "evidence": {
+            "liveWasmHash": "25fc306065cbb9b05461db78ec259802cb916053ba5b3ab911b0a72dd1a81439"
+          }
         }
       ]
     }

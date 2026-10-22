@@ -10,9 +10,22 @@ These are third-party transcriptions of official sources, retrieved 22 October 2
 
 No audit-to-WASM mapping was established from these deployment sources. Audit arrays are empty on purpose. A successful read can still be `incomplete`; a published hash is not an audit reference. Do not copy a live hash into the declared field just to obtain a match.
 
-## Recorded attempts
+## Recorded observations
 
-Reports under `reports/` are outputs from the checker, including failed reads. The recording environment on 22 October 2026 had restricted network access. These attempts do **not** establish live deployed hashes. `unavailable` describes that observation; it does not imply a protocol defect or code drift. Source pages were readable through web retrieval, separately from the RPC client.
+[`reports/2026-10-22/`](reports/2026-10-22/) holds Markdown, JSON and SVG outputs from running the checker on 22 October 2026 against the keyless public mainnet RPC `https://mainnet.sorobanrpc.com` (command in that folder's README). Statuses returned:
+
+| Manifest | Contract | Live WASM hash (truncated) | Status | Finding |
+|---|---|---|---|---|
+| Blend v2.1 | Emitter | 438a5528cff1... | `incomplete` | `no_declared_artifact` |
+| Blend v2.1 | Backstop v2.1 | c1f4502a757e... | `incomplete` | `no_declared_artifact` |
+| Blend v2.1 | Pool factory v2.1 | 313280505488... | `incomplete` | `no_declared_artifact` |
+| Soroswap | Factory | 5db738b05d91... | `incomplete` | `no_audit_reference` |
+| Soroswap | Router | 4c3db3ebd2d6... | `incomplete` | `no_audit_reference` |
+| Reflector | Stellar DEX oracle | 25fc306065cb... | `incomplete` | `no_declared_artifact` |
+| Reflector | External CEX and DEX oracle | 25fc306065cb... | `incomplete` | `no_declared_artifact` |
+| Reflector | Fiat oracle | 25fc306065cb... | `incomplete` | `no_declared_artifact` |
+
+For Soroswap, the live hashes equal the hashes in the project's published `mainnet.contracts.json`, but no audit artifact mapping was declared, so the tool does not report `match`. Nothing here is an audit, an endorsement, or a statement about protocol safety. The Stellar Asset Contract for native XLM was not included: it is a built-in non-WASM executable, which the tool reports as `incomplete` by design. Contract names were transcribed from the linked pages; confirm them there.
 
 ## Reproduce
 
