@@ -9,6 +9,7 @@ import { parseManifest } from "./manifest.ts";
 import { exitCodeFor, renderMarkdown, renderText } from "./render.ts";
 import type { Status } from "./types.ts";
 import { TOOL_VERSION } from "./version.ts";
+import { renderBadge } from "./badge.ts";
 
 export interface CliIo {
   stdout: (s: string) => void;
@@ -83,6 +84,7 @@ export async function runCli(argv: string[], io: CliIo): Promise<number> {
     .requiredOption("--rpc <url>", "Stellar RPC endpoint for the manifest's network")
     .option("--format <format>", "text, json or markdown", "text")
     .option("--out <file>", "also write the JSON report to this file")
+    .option("--badge-out <file>", "write an SVG badge showing this observation's overall status")
     .option("--fail-on <statuses>", "exit 1 when any contract has one of these statuses", parseFailOn, ["drift", "unavailable"] as Status[])
     .option("--strict", "shorthand for --fail-on drift,incomplete,unavailable")
     .option("--timeout <ms>", "per-request timeout in milliseconds", parsePositiveInt, 15000)
@@ -110,6 +112,7 @@ export async function runCli(argv: string[], io: CliIo): Promise<number> {
       const report = await checkManifest(manifest, { source, toolVersion: TOOL_VERSION });
       const json = JSON.stringify(report, null, 2) + "\n";
       if (opts.out) await writeFile(opts.out, json);
+      if (opts.badgeOut) await writeFile(opts.badgeOut, renderBadge(report));
       io.stdout(opts.format === "json" ? json : opts.format === "markdown" ? renderMarkdown(report) : renderText(report));
       const failOn: Status[] = opts.strict ? ["drift", "incomplete", "unavailable"] : opts.failOn;
       exit = exitCodeFor(report, failOn);

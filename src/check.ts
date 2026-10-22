@@ -45,7 +45,7 @@ async function checkNetwork(manifest: Manifest, source: LedgerSource): Promise<N
     const observed = await source.getNetworkPassphrase();
     return observed === expected ? { status: "match", expected, observed } : { status: "mismatch", expected, observed };
   } catch (e) {
-    return { status: "unavailable", expected, detail: e instanceof Error ? e.message.slice(0, 200) : "unknown error" };
+    return { status: "unavailable", expected, detail: e instanceof Error ? e.message.replace(/https?:\/\/\S+/g, "<url>").slice(0, 200) : "unknown error" };
   }
 }
 

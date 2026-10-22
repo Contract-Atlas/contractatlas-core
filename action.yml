@@ -1,0 +1,60 @@
+name: ContractAtlas deployment check
+description: Compare live Soroban code with declared hashes and audit artifact references.
+inputs:
+  manifest:
+    description: Manifest path relative to the caller's workspace.
+    required: true
+  rpc:
+    description: HTTPS RPC URL for the manifest's network. Use a repository secret for credentials.
+    required: true
+  strict:
+    description: Fail on incomplete evidence as well as drift and unavailable reads.
+    default: 'true'
+outputs:
+  report:
+    description: JSON report path, including failed observations.
+    value: ${{ steps.check.outputs.report }}
+  badge:
+    description: SVG badge path for this observation.
+    value: ${{ steps.check.outputs.badge }}
+  overall:
+    description: match, drift, incomplete or unavailable.
+    value: ${{ steps.check.outputs.overall }}
+  exit-code:
+    description: Checker exit code.
+    value: ${{ steps.check.outputs.exit-code }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 11.25.0
+        package_json_file: ${{ github.action_path }}/package.json
+    - name: Build the pinned action source
+      shell: bash
+      env:
+        CONTRACTATLAS_ACTION_PATH: ${{ github.action_path }}
+      run: |
+        pnpm --dir "$CONTRACTATLAS_ACTION_PATH" install --frozen-lockfile
+        pnpm --dir "$CONTRACTATLAS_ACTION_PATH" run build
+    - name: Check declared deployments
+      id: check
+      shell: bash
+      env:
+        CONTRACTATLAS_ACTION_PATH: ${{ github.action_path }}
+        CONTRACTATLAS_MANIFEST: ${{ inputs.manifest }}
+        CONTRACTATLAS_RPC: ${{ inputs.rpc }}
+        CONTRACTATLAS_STRICT: ${{ inputs.strict }}
+      run: node "$CONTRACTATLAS_ACTION_PATH/dist/ci.js"
+    - name: Preserve observation artifacts
+      if: ${{ always() && steps.check.outputs.report != '' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: contractatlas-${{ github.job }}-${{ github.action }}
+        path: |
+          ${{ steps.check.outputs.report }}
+          ${{ steps.check.outputs.badge }}
+        if-no-files-found: error
